@@ -1,0 +1,132 @@
+% main.tex
+% 定义使用xelatex编译。
+% 下面这个注释是会被vscode的latex workshop插件解释的
+%!TEX program=xelatex
+
+\documentclass[14pt]{ctexart} % 使用文章类，定义小四号为基本字号
+\usepackage{setspace} % 改变行距的包
+\usepackage{ulem} % \uline{更优雅的下划线}
+%%%%%%% 页面布局 %%%%%%%%
+% 定义写论文时通用的页边距
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+
+%%%%%%%%%% space %%%%%%%%%%
+% 其他间距
+\renewcommand{\baselinestretch}{1.2}
+\setlength{\parindent}{2em}
+\setlength{\floatsep}{3pt plus 3pt minus 2pt}      % 图形之间或图形与正文之间的距离
+\setlength{\abovecaptionskip}{10pt plus 1pt minus 1pt} % 图形中的图与标题之间的距离
+\setlength{\belowcaptionskip}{3pt plus 1pt minus 2pt} % 表格中的表与标题之间的距
+
+%%%%%%%% 字体样式定义 %%%%%%%%
+\usepackage{fontspec}
+% 英文全部使用新罗马字体
+\setmainfont[Mapping=tex-text]{Times New Roman}
+\setsansfont[Mapping=tex-text]{Times New Roman}
+\setmonofont{Times New Roman}
+
+\setCJKmainfont[BoldFont=方正黑体_GBK, ItalicFont=方正仿宋_GBK]{方正书宋_GBK} % 一般字体 
+\setCJKsansfont{方正黑体_GBK} % 方正黑
+\setCJKmonofont{方正楷体_GBK} % 方正楷
+
+% punctstyle设置标点符号挤压
+% 默认是弹性调整符号的空隙
+% 有全角、半角、开明、行末半角、plain
+\punctstyle{kaiming}
+
+%%%%%%%%%%% 标题样式定义 %%%%%%%%%%%%
+\usepackage{titlesec}
+%  \titleformat{command}[shape]  %定义标题类型和标题样式，字体
+%  {format}  %定义标题格式:字号（大小），加粗，斜体
+%  {label}  %定义标题的标签，即标题的标号等
+%  {sep}  %定义标题和标号之间的水平距离
+%  {before-code}  %定义标题前的内容
+%  [after-code]  %定义标题后的内容
+
+% 节 节后有一个空隙(但是默认就带有2个换行)
+\titleformat{\section}[block]
+{\fontsize{14pt}{0}\bfseries}
+{\thesection .}{1em}{}[\vspace{-1ex}]
+
+% 小节 节后有一个空隙(但是默认就带有2个换行)
+\titleformat{\subsection}[block]
+{\fontsize{12pt}{0}\bfseries}
+{\thesubsection}{1em}{}[\vspace{-1ex}]
+
+% 小小节 节后有一个空隙(但是默认就带有2个换行)
+\titleformat{\subsubsection}[block]
+{\fontsize{12pt}{0}}
+{\thesubsubsection}{1em}{}[\vspace{-1ex}]
+
+%%%%%%%%%% 列表格式 %%%%%%%%%%
+\usepackage{enumitem}
+\setlist{noitemsep}
+\setlist[1,2]{labelindent=\parindent}
+\setlist[enumerate,1]{label=\arabic*、}
+\setlist[enumerate,2]{label=（\arabic*）}
+\setlist{
+    topsep=0pt,
+    itemsep=0pt,
+    partopsep=0pt,
+    parsep=\parskip,
+}
+
+%%%%%%%%%%%% 脚注格式 %%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{*}
+
+%%%%%%%%%%%% 引用跳转 %%%%%%%%%%%%%%%%%
+% 该包可实现引用自动跳转
+% 如需跳转图文 添加代码 ~\ref{标签名}
+\usepackage{hyperref}
+\hypersetup{hidelinks} % 去除超链接难看的框框
+\bibliographystyle{gbt7714-2005-unsrt}
+
+% natbib支持自然引用和数字引用，而且可以压缩序号
+\usepackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{0.3ex} % 缩小参考文献的垂直间距
+
+%%%%%%%%% 图形导入 %%%%%%%%%
+\usepackage{graphicx} % 可以导入图形的包
+\graphicspath{{images/}} % 引入该目录，写文件时不再用写路径
+
+%%%%%%%%% 浮动体标题设置 %%%%%%%%%
+\usepackage[labelsep=space]{caption}
+\renewcommand{\captionfont}{\small \centering} % 标题字号变小、居中
+\renewcommand{\figurename}{图} %重定义编号前缀词
+\renewcommand{\tablename}{表} %重定义编号前缀词
+
+% 表格
+\usepackage{booktabs} % 科技排版常用四横线表格
+\usepackage{tabularx} % X列格式平均分配列宽解决方案
+\usepackage{multirow} % 合并表格行
+\usepackage{array}
+
+% 引用不仅仅是数字还包括前缀
+% 使用该包后标签必须以fig:balabala 这样的形式开头才能识别
+% 引用使用prettyref而不是ref
+\usepackage{prettyref}
+% 重定义引用前缀，并且添加超链接
+\newrefformat{fig}{\hyperref[#1]{图\ref*{#1}}}
+\newrefformat{eq}{\hyperref[#1]{式\ref*{#1}}}
+\newrefformat{tab}{\hyperref[#1]{表\ref*{#1}}}
+\newrefformat{sec}{\hyperref[#1]{ \ref*{#1} 节}} % 考虑到引用节的前面一般都是中文。在本文中全是，所以直接统一加上空格。
+
+% 数学公式配置
+\usepackage{amsmath} % 数学公式包
+\usepackage{amssymb} % 数学符号包
+% 一些漂亮的数学公式字体，只需要use包就好，在这里mark一下：
+% mathptmx字体、fourier、Eulervm
+% 不使用默认的字体是因为默认字体相对新罗马来说变形较厉害
+% 但是不存在times new roman字体的整套数学字体，因为它不全
+% 所以要设置字体为times风格：使用字体包 newtxmath
+\usepackage{newtxmath}
+\usepackage{bm} % 可使用mathbf加粗公式中的字母
+
+%%%%%%%% 符号输入 %%%%%%%
+\usepackage{textcomp} % 使用\textcelsius 输入摄氏度
+\usepackage{pdfpages} % 用于导入现成的pdf页面。底层是graphics，graphis的相关参数可以使用。
+
+% 文档开始
+\begin{document}
+\include{content}
+\end{document}

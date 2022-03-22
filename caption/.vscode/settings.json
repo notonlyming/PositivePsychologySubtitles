@@ -1,0 +1,59 @@
+{
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "xelatex only",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "xelatex->biber->xelatex->xelatex",
+            "tools": [
+                "xelatex",
+                "biber",
+                "xelatex",
+                "xelatex",
+            ]
+        },
+        {
+            "name": "xelatex->bibtex->xelatex->xelatex",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex",
+            ]
+        },
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "name":"xelatex",
+            "command": "xelatex",
+            "args":[
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
+            ],
+            "env":{}
+        },
+        {
+            "name":"bibtex",
+            "command": "bibtex",
+            "args":[
+                "%DOCFILE%"
+            ],
+            "env":{}
+        },
+        {
+            "name":"biber",
+            "command": "biber",
+            "args":[
+                "%DOCFILE%"
+            ],
+            "env":{}
+        }
+    ],
+    "latex-workshop.message.error.show": false,
+    "latex-workshop.message.warning.show": false
+}

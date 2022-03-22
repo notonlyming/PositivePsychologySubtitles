@@ -3,14 +3,17 @@
 % 下面这个注释是会被vscode的latex workshop插件解释的
 %!TEX program=xelatex
 
-\documentclass[14pt]{ctexart} % 使用文章类，定义小四号为基本字号
+\documentclass{ctexart} % 使用文章类，定义小四号为基本字号
 \usepackage{setspace} % 改变行距的包
 \usepackage{ulem} % \uline{更优雅的下划线}
 %%%%%%% 页面布局 %%%%%%%%
 % 定义写论文时通用的页边距
-\usepackage[a4paper, top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}
+\usepackage[a4paper, top=2cm, bottom=2cm, left=3cm, right=3cm]{geometry}
 
 %%%%%%%%%% space %%%%%%%%%%
+% 页码从1开始
+\setcounter{page}{1}
+\pagestyle{plain}  % 页脚居中显示页码
 % 其他间距
 \renewcommand{\baselinestretch}{1.2}
 \setlength{\parindent}{2em}
@@ -72,7 +75,7 @@
 }
 
 %%%%%%%%%%%% 脚注格式 %%%%%%%%%%%%%%%%
-\renewcommand{\thefootnote}{*}
+%\renewcommand{\thefootnote}{*}
 
 %%%%%%%%%%%% 引用跳转 %%%%%%%%%%%%%%%%%
 % 该包可实现引用自动跳转
